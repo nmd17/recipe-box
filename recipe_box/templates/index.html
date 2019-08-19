@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% if recipe_list %}
+    <ul>
+        {% for recipe in recipe_list %}
+            <li><a href="{% url 'recipe' recipe.id %}">{{ recipe.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/add_author">Click to add a new author</a>
+    <a href="/add_recipe">Click to add a new recipe</a>
+    <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+    <p>No recipes are available.</p>
+{% endif %}
