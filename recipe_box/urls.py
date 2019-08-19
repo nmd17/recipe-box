@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from recipe_box.views import index, recipe, author, add_author, add_recipe
+from recipe_box.views import index, recipe, author, add_author, add_recipe, logout_view, login_view
 
 urlpatterns = [
     path('', index),
@@ -24,6 +24,8 @@ urlpatterns = [
     path('author/<int:author_id>/', author, name='author'),
     path('add_author/', add_author, name='add_author'),
     path('add_recipe/', add_recipe, name='add_recipe'),
-    path('accounts/', include('django.contrib.auth.urls'))
+    #path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', logout_view, name='logout_view'),
+    path('login/', login_view)
 
 ]

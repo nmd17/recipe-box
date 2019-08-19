@@ -1,0 +1,28 @@
+{% load bootstrap4 %}
+
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex; flex-direction: row; justify-content:space-around;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <h2>Sign in</h2>
+                <form class='form' method='post' action='' style="border: 5px solid lightskyblue; padding: 75px; border-radius: 10px;">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <input type='submit' class='btn btn-primary' value='Sign In'>
+                </form>
+        </div>
+    </div>
+</body>
+</html>

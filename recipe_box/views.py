@@ -1,11 +1,12 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Recipe, Author
-from .forms import AuthorForm, RecipeForm
-from django.contrib.auth import authenticate, login
+from .forms import AuthorForm, RecipeForm, SignInForm
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+
 
 
 
@@ -55,5 +56,24 @@ def add_recipe(request):
         form = RecipeForm()
 
     return render(request, 'recipe_form.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/login')
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        if request.method == 'POST':
+            form = SignInForm(data=request.POST)
+
+            if form.is_valid():
+                    login(request, form.get_user())
+                    return redirect('/')
+        else:
+            form = SignInForm()
+
+            return render(request, 'login.html', {'form': form})
 
 
